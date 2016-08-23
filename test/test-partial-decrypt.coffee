@@ -14,6 +14,7 @@ offset = 3125
 byteOffset = (16 * offset)
 
 console.log "creating partial file to compare against"
+console.log "tail -c +#{byteOffset} #{originFile} > #{partialOriginFile}"
 child_process.execSync "tail -c +#{byteOffset} #{originFile} > #{partialOriginFile}"
 
 fileInStream = fs.createReadStream(encryptedFile, {start: (16 * offset)})
@@ -31,7 +32,7 @@ fileInStream.once 'readable', () ->
 
     fileOutStream.on 'finish', () ->
       console.log "partial decryption finished"
-
+      console.log "cmp -q #{partialOriginFile} #{decryptedFile}"
       child_process.exec "cmp -q #{partialOriginFile} #{decryptedFile}", (err, stdin, stdout) ->
         if err?
           console.log "passed: origin file and decrypted file are the same"

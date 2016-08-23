@@ -1,7 +1,7 @@
 cryptoAesCtr = require  "../lib"
 fs = require "fs"
 
-originFile = "test-origin.mp4"
+originFile = "test-decrypt.coffee"
 encryptedFile = "test-encrypted.enc"
 
 key = new Buffer("8fbf35890fc3e0d5bc615cb091f16e8d40cfe3d4223cd68b11e2e7204d890210", "hex")
